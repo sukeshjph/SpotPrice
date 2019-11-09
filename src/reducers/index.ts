@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux';
-import fetchRatesReducer from '../components/FX/FXReducer';
+import fetchRatesReducer, { FXReducerType } from '../components/FX/FXReducer';
 
-const rootReducer = combineReducers({
+export interface AppState {
+  RATES: FXReducerType;
+}
+
+const rootReducer = combineReducers<AppState>({
   RATES: fetchRatesReducer,
 });
 

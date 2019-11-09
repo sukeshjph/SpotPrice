@@ -13,6 +13,7 @@ const fetchRatesReducer = createReducer<FXState, FXActionsType>(initialState)
     ...state,
     isFetchingRates: true,
     errorFetchingRates: '',
+    rates: {},
   }))
   .handleAction(FXActions.fetchCurrencyRatesByBaseComplete, (state, action) => ({
     ...state,

@@ -59,7 +59,7 @@ const DisplayFX: React.FC<FXProps> = React.memo(props => {
 
   useEffect(() => {
     fetchCurrencyRatesByBase('USD');
-  }, []);
+  }, []); // Only runs on first render
 
   const handleRefresh = () => fetchCurrencyRatesByBase('USD');
 
