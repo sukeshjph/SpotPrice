@@ -22,21 +22,28 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 ## Spot Price
 Project uses following libraries other than ones offered by CRA
+
 a) Typesafe-actions:
    Can't describe how much boilerplate it cuts down. It provides typesafe 
    createAction, createReducer, actionType union, Rxjs Epic support etc.
+
 b) Material-UI:
    Few components like IconButton etc are used from Material-UI
+
 c) whatwg-fetch:
    Fetch API for ajax requests(Axios can also be used or Rxjs ajax)
+
 d) Enzyme:
    To support Shallow unit testing using Jest and jsdom
    
+
 e) Rxjs and Redux-Observable:
    Hugely popular library with tons of operators like mergemap,switchMap,concatmap etc. to maange 
    side effects and helping to keep reducer clean and pure.
+   
 f) Redux Devtool:
    Redux devtool chrome extension detects and loads. Asssits observing redux actions,state changes
+   
 g) Redux, React-redux:
    No explaination needed :)
    
