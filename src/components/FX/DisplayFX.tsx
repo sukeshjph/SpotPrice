@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Icon from '@mdi/react';
 import { mdiRefresh } from '@mdi/js';
+import cn from 'classnames';
 import { FXProps } from './FXTypes';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -27,11 +28,18 @@ const useStyles = makeStyles(theme => ({
   },
   currencyBoxItem: {
     textAlign: 'left',
-    paddingBottom: '0.5rem',
+    marginBottom: '2rem',
+    minHeight: '40px',
+    backgroundColor: '#94b596',
+    borderRadius: '5px',
+    width: '20rem',
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: '5px',
   },
   currencyBoxItemLabel: {
     paddingRight: '1rem',
-    ontSize: '1.1rem',
+    fontSize: '1.1rem',
   },
 }));
 
@@ -57,21 +65,26 @@ const DisplayFX: React.FC<FXProps> = React.memo(props => {
 
   return (
     <div className={classes.mainContainer}>
-      <IconButton onClick={handleRefresh}>
+      <IconButton onClick={handleRefresh} className="refresh-btn" style={{ marginBottom: '10px' }}>
         <Icon path={mdiRefresh} title="Refresh" size={1} color="red" />
       </IconButton>
-      <div className={classes.curContainer}>
-        <span className={classes.mainLabel}>1 USD:</span>
-        <div className={classes.currencyBox}>
-          {currenciesList.map(cur => (
-            <div className={classes.currencyBoxItem}>
-              <span className={classes.currencyBoxItemLabel}>{cur}</span>
-              <span>{rates[cur]}</span>
-            </div>
-          ))}
-          <div className={classes.currencyBoxItem}>{getCurrentTimeStamp()}</div>
+      {isFetchingRates && <div className="loading-panel">Loading...</div>}
+      {!isFetchingRates && errorFetchingRates == '' && (
+        <div className={classes.curContainer}>
+          <span className={classes.mainLabel}>Rates:</span>
+          <div className={cn(classes.currencyBox, 'cBox')}>
+            {currenciesList.map((cur, index) => (
+              <div className={classes.currencyBoxItem} key={`currencyBoxItem${index}`}>
+                <span className={classes.currencyBoxItemLabel}>1 USD =</span>
+                <span style={{ paddingRight: '1rem' }}>{rates[cur]}</span>
+                <span>{cur}</span>
+              </div>
+            ))}
+            <div style={{ textAlign: 'left' }}>{getCurrentTimeStamp()}</div>
+          </div>
         </div>
-      </div>
+      )}
+      {errorFetchingRates !== '' && <span className="error-panel">error:{errorFetchingRates}</span>}
     </div>
   );
 });
